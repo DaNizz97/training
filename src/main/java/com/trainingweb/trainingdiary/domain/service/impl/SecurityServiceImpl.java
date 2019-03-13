@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.ServerEndpoint;
+import java.util.Objects;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
@@ -55,7 +56,7 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public void logout() {
         HttpServletRequest httpServletRequest =
-                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication != null) {
             new SecurityContextLogoutHandler().logout(httpServletRequest,null,null);

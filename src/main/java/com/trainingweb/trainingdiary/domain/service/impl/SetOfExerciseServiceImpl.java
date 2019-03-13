@@ -22,6 +22,11 @@ public class SetOfExerciseServiceImpl implements SetOfExerciseService {
     }
 
     @Override
+    public void delete(SetOfExercise setOfExercise) {
+        /* TODO: Fill delete method in SetOfExerciseServiceImpl */
+    }
+
+    @Override
     public void save(SetOfExercise setOfExercise) {
         setOfExerciseRepository.save(setOfExercise);
     }

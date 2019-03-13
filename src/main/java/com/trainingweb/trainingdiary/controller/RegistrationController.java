@@ -3,6 +3,9 @@ package com.trainingweb.trainingdiary.controller;
 import com.trainingweb.trainingdiary.domain.model.User;
 import com.trainingweb.trainingdiary.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +20,12 @@ import java.util.Optional;
 @RequestMapping(value = "/registration")
 public class RegistrationController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/")
     public String registrationPage(Model model) {

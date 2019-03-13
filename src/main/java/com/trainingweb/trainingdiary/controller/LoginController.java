@@ -15,13 +15,17 @@ import java.util.Optional;
 public class LoginController {
 
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/")
     public String login(Model model) {
         Optional<User> user = userService.getCurrentAuthUser();
-        user.ifPresent((user1) -> model.addAttribute("userName", "Logged in as" + user.get().getFirstName() + " " + user.get().getLastName()));
+        user.ifPresent((user1) -> model.addAttribute("userName", "Logged in as" + user1.getFirstName() + " " + user1.getLastName()));
 /*        if (user.isPresent())
             model.addAttribute("userName", "Logged in as " + user.get().getFirstName() + " " + user.getLastName());*/
         return "login";
